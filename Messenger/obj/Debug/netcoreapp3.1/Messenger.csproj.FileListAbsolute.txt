@@ -172,4 +172,4 @@ C:\Users\Johnny\source\repos\Messenger\Messenger\obj\Debug\netcoreapp3.1\Razor\A
 C:\Users\Johnny\source\repos\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.csproj.CoreCompileInputs.cache
 C:\Users\Johnny\source\repos\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Johnny\source\repos\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Johnny\source\repos\Messenger\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Home\DirectMessage.cshtml.g.cs
+C:\Users\Johnny\source\repos\Messenger\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\DirectMessage.cshtml.g.cs

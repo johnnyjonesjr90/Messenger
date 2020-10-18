@@ -8,10 +8,14 @@ using Messenger.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Messenger
 {
@@ -30,11 +34,16 @@ namespace Messenger
             services.AddDbContext<MessengerContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("MessengerContextConnection")));
-            //services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            //services.AddDefaultIdentity<MessengerUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            //    .AddEntityFrameworkStores<MessengerContext>();
+            services.AddScoped<IMessage, EFMessage>();
+            //services.AddDefaultIdentity<MessengerUser>()
+            //    .AddDefaultUI(UIFramework.Bootstrap4)
             //    .AddEntityFrameworkStores<MessengerContext>();
             services.AddSignalR();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc();
         }
 
 
@@ -55,11 +64,16 @@ namespace Messenger
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseRouting();
-            app.UseSignalR(route =>
-            {
-                route.MapHub<ChatHub>("/Home/ChatHome");
-            });
-            
+            //app.UseSignalR(route =>
+            //{
+            //    route.MapHub<ChatHub>("/Home");
+            //});
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=Home}/{action=Index}/{id?}");
+            //});
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -68,6 +82,7 @@ namespace Messenger
                     name: "default",
                     pattern: "{controller=Home}/{action=ChatHome}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/Home/ChatHome");
             });
         }
     }

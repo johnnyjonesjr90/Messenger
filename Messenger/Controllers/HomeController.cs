@@ -19,7 +19,7 @@ namespace Messenger.Controllers
     {
         private readonly MessengerContext _context;
         public readonly UserManager<MessengerUser> _userManager;
-        private readonly ILogger<HomeController> _logger;
+        
 
         public HomeController(MessengerContext context, UserManager<MessengerUser> userManager)
         {
@@ -48,7 +48,8 @@ namespace Messenger.Controllers
                 message.UserID = sender.Id;
                 await _context.Messages.AddAsync(message);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return RedirectToAction("ChatHome");
+                
 
             }
             return Error();
