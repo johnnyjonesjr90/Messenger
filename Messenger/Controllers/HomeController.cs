@@ -35,9 +35,12 @@ namespace Messenger.Controllers
             {
                 ViewBag.CurrentUserName = currentUser.UserName;
             }
-
-            var messages = await _context.Messages.ToListAsync();
-            return View(messages);
+            ViewModel viewModel = new ViewModel();
+            viewModel.User = await _context.User.ToListAsync();
+            viewModel.Messages = await _context.Messages.ToListAsync();
+            //var messages = await _context.Messages.ToListAsync();
+            //var user = await _context.User.ToListAsync();
+            return View(viewModel);
         }
         public async Task<IActionResult> Create(Message message)
         {

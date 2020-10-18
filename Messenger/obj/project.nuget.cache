@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/rTgEBKt42q+sjAN5YSJcSpeb5FJi9AQNBxC05O2PdaMDoPgGAt3MP9pCoibY/2nGb9NtkyPne5zM2l6RWp2yQ==",
+  "dgSpecHash": "bF/zdM3wDE8tBf1nlU7c9Zb8/zIabaJPnf6tcaXBnG0orezen1H9Vl9Um5pW7JC0azJRVc+HILehUaPtBYbZ2g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Johnny\\source\\repos\\Messenger\\Messenger\\Messenger.csproj",
+  "projectFilePath": "C:\\Users\\Johnny\\Documents\\GitHub\\Messenger\\Messenger\\Messenger.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Johnny\\.nuget\\packages\\jquery\\1.6.4\\jquery.1.6.4.nupkg.sha512",
     "C:\\Users\\Johnny\\.nuget\\packages\\microsoft.aspnet.signalr.js\\2.4.1\\microsoft.aspnet.signalr.js.2.4.1.nupkg.sha512",
