@@ -27,8 +27,17 @@ namespace Messenger.Controllers
             _userManager = userManager;
         }
 
-        
-        public async Task<IActionResult> ChatHome()
+        public async Task<IActionResult> Index()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.CurrentUserName = currentUser.UserName;
+            }
+            var posts = await _context.Posts.ToListAsync();
+            return View(posts);
+        }
+            public async Task<IActionResult> ChatHome()
         {
             var currentUser = await _userManager.GetUserAsync(User);
             if (User.Identity.IsAuthenticated)
@@ -53,6 +62,21 @@ namespace Messenger.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("ChatHome");
                 
+
+            }
+            return Error();
+        }
+        public async Task<IActionResult> Create2(Posts post)
+        {
+            if (ModelState.IsValid)
+            {
+                post.UserName = User.Identity.Name;
+                var sender = await _userManager.GetUserAsync(User);
+                post.UserID = sender.Id;
+                await _context.Posts.AddAsync(post);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+
 
             }
             return Error();

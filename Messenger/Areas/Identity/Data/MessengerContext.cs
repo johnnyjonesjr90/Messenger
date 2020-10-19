@@ -29,6 +29,6 @@ namespace Messenger.Data
         }
         public DbSet<Message> Messages { get; set; }
         public DbSet<MessengerUser> User { get; set; }
-
+        public DbSet<Posts> Posts { get; set; }
     }
 }

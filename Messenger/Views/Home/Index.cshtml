@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Messenger.Models.Message>
+﻿@using Microsoft.AspNetCore.Identity
+@*@using Messenger.Models*@
+@model IEnumerable<Messenger.Models.Posts>
+@inject UserManager<MessengerUser> UserManager
 @{
     ViewData["Title"] = "Home Page";
     var userName = User.Identity.Name;
@@ -6,66 +9,74 @@
 
 
 
-<div class="jumbotron bg-light">
-    <h2 class="text-center text-primary">
-        <i class="fab fa-facebook-messenger"></i>&nbsp; Messenger
-    </h2>
+<div style="text-align:center">
+    <h2>@UserManager.GetUserName(User)'s Profile page</h2>
+</div>
 
+<div>
+    <div style="float:right; margin-top:2%;">
+        <img src="~/plimplim.jpg" style="width: 20%; float:right"/>
+    </div>
+
+</div>
+<div class="jumbotron bg-light" >
+
+    <div class="col-md-12">
+        <form asp-action="Create2"
+              data-ajax-begin="clearInputField" data-ajax-complete=""
+              data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+              data-ajax="true" data-ajax-method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input name="Text" class="form-control" id="messageText" placeholder="Start a Post!"/>
+            </div>
+            <div class="form-group">
+                <input style="background-color: black; width:25%;text-align:center" type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
+            </div>
+            <input type="hidden" value="@userName" name="username" />
+        </form>
+    </div>
     <div class="row">
-        <div class="col-md-12" id="chat">
-            @if (Model != null)
-            {
-                @foreach (var message in Model.OrderBy(m => m.When))
+
+        <div @*style="height:500px;width:800px;border:2px solid #ccc;overflow:auto;margin-bottom: 50px;"*@>
+            <div class="col-md-12" id="chat">
+                @if (Model != null)
                 {
-                    string containerClass, timePosition, textAlign, contcolor, offset;
-                    if (userName == message.UserName)
+                    @foreach (var post in Model.OrderByDescending(p => p.When))
                     {
-                        containerClass = "container darker";
-                        timePosition = "time-right text-light";
-                        textAlign = "text-right text-white";
-                        contcolor = "bg-primary";
-                        offset = "col-md-6 offset-md-6";
-                    }
-                    else
-                    {
+                        string containerClass, timePosition, textAlign, contcolor, offset, border;
+
                         containerClass = "container";
                         timePosition = "time-left";
                         textAlign = "text-left";
                         contcolor = "bg-light";
                         offset = "";
-                    }
+                        border = "border-radius:20%";
 
-                    <div class="row">
-                        <div class="@offset">
-                            <div class="@containerClass @contcolor">
 
-                                <p class="sender @textAlign">@message.UserName</p>
-                                <p class="@textAlign">@message.Text</p>
-                                <span class="@timePosition">@message.When.ToString("M/dd/yyyy hh:MM tt")</span>
+                        <div class="containerz">
+                            <div class="@offset">
+                                <div class="@containerClass @contcolor @border">
+
+                                    <span class="@timePosition">@post.When.ToString("M/dd/yyyy hh:MM tt")</span>
+                                    <p class="@textAlign">@post.Text</p>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 }
-            }
-        </div>
-        <div class="col-md-12">
-            <form asp-action="Create"
-                  data-ajax-begin="clearInputField" data-ajax-complete=""
-                  data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
-                  data-ajax="true" data-ajax-method="POST">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <input name="Text" class="form-control" id="messageText" />
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
-                </div>
-                <input type="hidden" value="@userName" name="username" />
-            </form>
+            </div>
         </div>
     </div>
+    <div>
+
+
+    </div>
+
 
 </div>
+
 @if (User.Identity.IsAuthenticated)
 {
     <script>
@@ -77,6 +88,6 @@
 @section scripts {
     <script src="~/signalr/signalr.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/js/chat.js"></script>
-    <script src="~/js/signalrReqHandler.js"></script>
+    <script src="~/js/post.js"></script>
+    <script src="~/js/signalrPostHandler.js"></script>
 }
