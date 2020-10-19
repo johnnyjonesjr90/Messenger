@@ -1,66 +1,113 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @*@using Messenger.Models*@
-@model IEnumerable<Messenger.Models.Posts>
+@*@model IEnumerable<Messenger.Models.Posts>*@
+@model ViewModel
 @inject UserManager<MessengerUser> UserManager
 @{
     ViewData["Title"] = "Home Page";
     var userName = User.Identity.Name;
+    
 }
 
 
+<head>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<div class="containerz">
+    
+    <img src="~/plimplim.jpg" style="width: 20%; float:right" />
 
-<div style="text-align:center">
-    <h2>@UserManager.GetUserName(User)'s Profile page</h2>
 </div>
 
-<div>
-    <div style="float:right; margin-top:2%;">
-        <img src="~/plimplim.jpg" style="width: 20%; float:right"/>
-    </div>
 
-</div>
-<div class="jumbotron bg-light" >
+<div class="jumbotron bg-light">
+    
+        <div class="col-md-12" style="width: 70%; margin-left:15%">
+            <form asp-action="Create2"
+                  data-ajax-begin="clearInputField" data-ajax-complete=""
+                  data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+                  data-ajax="true" data-ajax-method="POST">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input name="Text" class="form-control" id="messageText" placeholder="Start a Post!" style="width: 60%" />
+                </div>
+                <div class="form-group">
+                    <input style="background-color: black; width:10%;text-align:center" type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
+                </div>
+                <input type="hidden" value="@userName" name="username" />
+            </form>
+        </div>
+   
+    <div class="row" style="margin-top:10%; margin-left:0%; width:100%; ">
 
-    <div class="col-md-12">
-        <form asp-action="Create2"
-              data-ajax-begin="clearInputField" data-ajax-complete=""
-              data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
-              data-ajax="true" data-ajax-method="POST">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input name="Text" class="form-control" id="messageText" placeholder="Start a Post!"/>
-            </div>
-            <div class="form-group">
-                <input style="background-color: black; width:25%;text-align:center" type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
-            </div>
-            <input type="hidden" value="@userName" name="username" />
-        </form>
-    </div>
-    <div class="row">
-
-        <div @*style="height:500px;width:800px;border:2px solid #ccc;overflow:auto;margin-bottom: 50px;"*@>
+        <div>
             <div class="col-md-12" id="chat">
                 @if (Model != null)
                 {
-                    @foreach (var post in Model.OrderByDescending(p => p.When))
+                    @foreach (var post in Model.Posts.OrderByDescending(p => p.When))
                     {
-                        string containerClass, timePosition, textAlign, contcolor, offset, border;
 
-                        containerClass = "container";
-                        timePosition = "time-left";
-                        textAlign = "text-left";
-                        contcolor = "bg-light";
-                        offset = "";
-                        border = "border-radius:20%";
+                        <div class="container" style="width:1800px">
+                            <div class="col-md-5" style="box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52); padding-left:0%; padding-right:0%;padding-bottom:-2%; margin-bottom:5% ">
+                                <div class="panel panel-default"style="margin-bottom:0%">
+                                    <div class="panel-body">
+                                        <section class="post-heading">
+                                            <div class="row">
+                                                <div class="col-md-11">
+                                                    <div class="media">
+                                                        <div class="media-left" style="margin-right:-2%">
+                                                            <a href="#">
+                                                                <img src="~/plimplim.jpg" style="width: 15%" />
+                                                            </a>
+                                                            <a href="#" class="anchor-username"><h3 class="media-heading">@post.UserName</h3></a>
+                                                            <a href="#" class="anchor-time">@post.When.ToString("M/dd/yyyy hh:MM tt")</a>
+                                                        </div>
+                                                        <!--<div--> @*class="media-left"*@ <!--style="float:left">
+                                                            <a href="#" class="anchor-username"><h4 class="media-heading">@post.UserName</h4></a>
+                                                            <a href="#" class="anchor-time">@post.When.ToString("M/dd/yyyy hh:MM tt")</a>
+                                                        </div>-->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section class="post-body" style="margin-top:2%">
+                                            <p>
+                                                @post.Text
+                                            </p>
+                                        </section>
+                                        <section class="post-footer" style="margin-bottom:0%">
+                                            <hr>
+                                            <div class="post-footer-option container">
+                                                <ul class="list-unstyled" style="display:inline">
+                                                    <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+                                                    <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+                                                    <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+                                                </ul>
+                                            </div>
+                                            <!--<div class="post-footer-comment-wrapper">
+                                                <div class="comment-form">
 
+                                                </div>-->
+                                            @*<div class="comment">
+                                                    <div class="media">
+                                                        <div class="media-left">
 
-                        <div class="containerz">
-                            <div class="@offset">
-                                <div class="@containerClass @contcolor @border">
-
-                                    <span class="@timePosition">@post.When.ToString("M/dd/yyyy hh:MM tt")</span>
-                                    <p class="@textAlign">@post.Text</p>
-
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <a href="#" class="anchor-username"><h4 class="media-heading">Media heading</h4></a>
+                                                            <a href="#" class="anchor-time">51 mins</a>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                            <!--</div>-->
+                                        </section>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -34,9 +34,14 @@ namespace Messenger.Controllers
             {
                 ViewBag.CurrentUserName = currentUser.UserName;
             }
-            var posts = await _context.Posts.ToListAsync();
-            return View(posts);
+            ViewModel viewModel = new ViewModel();
+            viewModel.Posts = await _context.Posts.ToListAsync();
+            viewModel.User = await _context.User.ToListAsync();
+            return View(viewModel);
         }
+
+
+
             public async Task<IActionResult> ChatHome()
         {
             var currentUser = await _userManager.GetUserAsync(User);
@@ -51,6 +56,10 @@ namespace Messenger.Controllers
             //var user = await _context.User.ToListAsync();
             return View(viewModel);
         }
+
+
+
+
         public async Task<IActionResult> Create(Message message)
         {
             if (ModelState.IsValid)
