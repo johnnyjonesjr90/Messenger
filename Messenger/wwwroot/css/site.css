@@ -98,6 +98,7 @@ body {
 
         .vertical-menu a:hover {
             background-color: crimson; /* Dark grey background on mouse-over */
+            color: white;
         }
 
         .vertical-menu a.active {
@@ -141,7 +142,8 @@ body {
                 }
 
             .wrapper .sidebar ul li:hover {
-                background-color: crimson
+                background-color: crimson;
+                color:white;
             }
 
                 .wrapper .sidebar ul li:hover a {
