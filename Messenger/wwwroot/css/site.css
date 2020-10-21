@@ -192,3 +192,37 @@ body {
             .wrapper .main_content .info div {
                 margin-bottom: 20px;
             }
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+    position: fixed;
+    top: 0;
+    /*width: 100%;*/
+}
+.navbar3 {
+    overflow: hidden;
+    background-color: gray;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+    /* Links inside the navbar */
+    .navbar3 a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        /* Change background on mouse-over */
+        .navbar3 a:hover {
+            background: #ddd;
+            color: black;
+        }
+
+/* Main content */
+.main {
+    margin-top: 30px; /* Add a top margin to avoid content overlay */
+}

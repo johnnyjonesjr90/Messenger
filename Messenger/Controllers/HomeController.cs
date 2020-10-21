@@ -39,10 +39,20 @@ namespace Messenger.Controllers
             viewModel.User = await _context.User.ToListAsync();
             return View(viewModel);
         }
+        public async Task<IActionResult> Profile()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.CurrentUserName = currentUser.UserName;
+            }
+            ViewModel viewModel = new ViewModel();
+            viewModel.User = await _context.User.ToListAsync();
+            return View(viewModel);
+        }
 
 
-
-            public async Task<IActionResult> ChatHome()
+        public async Task<IActionResult> ChatHome()
         {
             var currentUser = await _userManager.GetUserAsync(User);
             if (User.Identity.IsAuthenticated)

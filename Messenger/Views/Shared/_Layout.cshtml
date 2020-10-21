@@ -16,9 +16,9 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="position: static; top: 0; width:100%">
             <div class="container">
-                <a style="color:crimson;padding-left:10px; padding-right:10px;" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Messenger</a>
+                <a style="color:crimson;padding-left:10px; padding-right:10px;font-size:200%" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Messenger</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,13 +33,13 @@
     </header>
     @if (SignInManager.IsSignedIn(User))
     {
-        <div style="width: 15%; margin-right: 8%; float: left; margin-left">
-            <div class="sidebar; vertical-menu" style="margin-left:25%;box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52)">
+        <div  style="width: 15%; margin-right: 8%; float: left; margin-left; position:sticky; top:70px">
+            <div class="sidebar; vertical-menu" style="margin-left:80%;box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52)">
                 <div>
-                    <a href="#"><i class="fas fa-home"></i>Home</a>
-                    <a href="C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\Views\Home\Index.cshtml"><i class="fas fa-user"></i>Profile</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i>Home</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Profile"><i class="fas fa-user"></i>Profile</a>
                     <a href="#"><i class="fas fa-address-card"></i>About</a>
-                    <a href="#"><i class="fas fa-project-diagram"></i>portfolio</a>
+                    <a asp-area="" asp-controller="Home" asp-action="ChatHome"><i class="fab fa-facebook-messenger"></i>Messenger</a>
                     <a href="#"><i class="fas fa-blog"></i>Blogs</a>
                     <a href="#"><i class="fas fa-address-book"></i>Contact</a>
                     <a href="#"><i class="fas fa-map-pin"></i>Map</a>
@@ -52,25 +52,43 @@
             </div>
         </div>
     }
-        @*<div id="Users" class="col-3">
-                <vc:direct-message />
-            </div>*@
+    @*<div id="Users" class="col-3">
+            <vc:direct-message />
+        </div>*@
 
-        <div @*class="container"*@>
+    <div @*class="container"*@>
 
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Messenger - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+    </footer>
+    @*<script>
+            window.onscroll = function () { myFunction() };
 
-        @*<footer class="border-top footer text-muted">
-                <div class="container">
-                    &copy; 2020 - Messenger - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </div>
-            </footer>*@
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
-    </body>
+            var navbar = document.getElementById("navbar");
+
+            var sticky = navbar.offsetTop;
+
+            function myFunction() {
+                if (window.pageYOffset >= sticky) {
+                    navbar.classList.add("sticky")
+
+                } else {
+                    navbar.classList.remove("sticky");
+                }
+            }
+        </script>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/StickyNav.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
 </html>

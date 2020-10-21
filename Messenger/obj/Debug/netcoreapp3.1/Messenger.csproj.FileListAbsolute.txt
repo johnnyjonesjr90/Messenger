@@ -348,3 +348,4 @@ C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\sta
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.dll
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.pdb
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.genruntimeconfig.cache
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Home\Profile.cshtml.g.cs
