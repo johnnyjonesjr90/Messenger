@@ -19,7 +19,7 @@ namespace Messenger.Controllers
     {
         private readonly MessengerContext _context;
         public readonly UserManager<MessengerUser> _userManager;
-        
+
 
         public HomeController(MessengerContext context, UserManager<MessengerUser> userManager)
         {
@@ -51,6 +51,13 @@ namespace Messenger.Controllers
             return View(viewModel);
         }
 
+        //public async Task<IActionResult> UserProfile(string userid)
+        //{
+        //    ViewModel viewModel = new ViewModel();
+        //    viewModel.User = await _context.User.ToListAsync();
+        //    ViewBag.UserID = userid;
+        //    return View(viewModel);
+        //}
 
         public async Task<IActionResult> ChatHome()
         {

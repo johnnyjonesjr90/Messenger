@@ -13,7 +13,8 @@
         @foreach (var user in Model.User.OrderBy(m => m.UserName))
         {
             //Displays link for users. Does not initiate a one on one chat yet. 
-            <a href="#">@user.UserName</a>
+            <a asp-action="UserProfile" asp-controller="Profile"
+           asp-route-userid="@user.Id">@user.UserName</a>
         }
     </div>
 
@@ -80,7 +81,7 @@
                     <input name="Text" class="form-control" id="messageText" />
                 </div>
                 <div class="form-group">
-                    <input style="background-color:crimson;color: white; outline-color:crimson" type="submit" value="Send" id="submitButton" class="btn btn-primary btn-block" />
+                    <input style="background-color:crimson;color: white; outline-color:crimson" type="submit" value="Send" id="submitButton" class="btn btn btn-block" />
                 </div>
                 <input type="hidden" value="@userName" name="username" />
             </form>

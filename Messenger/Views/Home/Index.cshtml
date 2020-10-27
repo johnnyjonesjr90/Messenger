@@ -6,7 +6,7 @@
 @{
     ViewData["Title"] = "Home Page";
     var userName = User.Identity.Name;
-
+    MessengerUser v = Model.User.First(u => u.UserName == User.Identity.Name);
 }
 
 
@@ -16,10 +16,10 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
-<div style="float: right; width: 20%; height: 500px;margin-right:11%;box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52);position:sticky; top:70px">
+<div style="float: right; width: 20%; height: 500px;margin-right:11%;border-top-left-radius:15%;border-top-right-radius:15% ;position:sticky; top:70px;background-color: #eee">
     <div class="container" style="; ">
-        <img src="~/plimplim.jpg" style="width: 20%; margin-left:5%" />
-        <h3 style="margin-left: 3%; width: 30%">@userName</h3>
+        <img src="~/no-profile-pic-icon-24.jpg" style="width: 20%; margin-left:5%;border-radius:50%" />
+        <h3 style="margin-left: 3%; width: 30%">@v.FirstName @v.LastName</h3>
     </div>
 </div>
 
@@ -37,7 +37,7 @@
                         <input name="Text" class="form-control" id="messageText" placeholder="Start a Post!" style="width: 90%; margin-top: 2%" />
                     </div>
                     <div class="form-group">
-                        <input style="background-color: black; width:10%;text-align:center" type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
+                        <input style="background-color: crimson; width:15%;text-align:center; color: white" type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
                     </div>
                     <input type="hidden" value="@userName" name="username" />
                 </form>
@@ -64,16 +64,16 @@
                                                     <div class="media">
                                                         <div class="media-left" style="margin-right:-2%">
                                                             <a href="#">
-                                                                <img src="~/plimplim.jpg" style="width: 15%" />
+                                                                <img src="~/no-profile-pic-icon-24.jpg" style="width: 15%;border-radius:50%" />
                                                             </a>
                                                             <a href="#" class="anchor-username"><h3 class="media-heading">@post.UserName</h3></a>
                                                             <a href="#" class="anchor-time">@post.When.ToString("M/dd/yyyy hh:MM tt")</a>
                                                         </div>
                                                         <!--<div--> @*class="media-left"*@
                                                         <!--style="float:left">
-                                                            <a href="#" class="anchor-username"><h4 class="media-heading">@post.UserName</h4></a>
-                                                            <a href="#" class="anchor-time">@post.When.ToString("M/dd/yyyy hh:MM tt")</a>
-                                                        </div>-->
+                                                        <a href="#" class="anchor-username"><h4 class="media-heading">@post.UserName</h4></a>
+                                                        <a href="#" class="anchor-time">@post.When.ToString("M/dd/yyyy hh:MM tt")</a>
+                                                    </div>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-md-1">
@@ -96,20 +96,20 @@
                                                 </ul>
                                             </div>
                                             <!--<div class="post-footer-comment-wrapper">
-                                                <div class="comment-form">
+                                            <div class="comment-form">
 
-                                                </div>-->
+                                            </div>-->
                                             @*<div class="comment">
-                                                    <div class="media">
-                                                        <div class="media-left">
+                                                <div class="media">
+                                                    <div class="media-left">
 
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <a href="#" class="anchor-username"><h4 class="media-heading">Media heading</h4></a>
-                                                            <a href="#" class="anchor-time">51 mins</a>
-                                                        </div>
                                                     </div>
-                                                </div>*@
+                                                    <div class="media-body">
+                                                        <a href="#" class="anchor-username"><h4 class="media-heading">Media heading</h4></a>
+                                                        <a href="#" class="anchor-time">51 mins</a>
+                                                    </div>
+                                                </div>
+                                            </div>*@
                                             <!--</div>-->
                                         </section>
                                     </div>

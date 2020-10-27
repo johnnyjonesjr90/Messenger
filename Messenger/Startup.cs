@@ -81,6 +81,15 @@ namespace Messenger
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=ChatHome}/{id?}");
+
+                //endpoints.MapControllerRoute("profile",
+                //"Profile/{userid}",
+                //new { Controller = "Home", action = "UserProfile" });
+
+                endpoints.MapControllerRoute("profile",
+                "Profile/{userid}",
+                new { Controller = "Profile", action = "UserProfile" });
+
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/Home/ChatHome");
             });

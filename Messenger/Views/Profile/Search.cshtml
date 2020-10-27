@@ -1,0 +1,61 @@
+﻿@model PagedList.IPagedList<MessengerUser>
+@using PagedList.Mvc;
+
+
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<div class="container" style="margin-left:30%">
+    <h1>Search Users</h1>
+
+
+    @using (Html.BeginForm("Search", "Profile", FormMethod.Get))
+    {
+        <p>
+            Find by name / email: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        </p>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Last Name", "Search", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                @Html.ActionLink("Email", "Search", new { sortOrder = ViewBag.EmailSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                Profile
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a asp-action="UserProfile" asp-controller="Profile"
+                       asp-route-userid="@item.Id">Click to View Profile</a>
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @*@Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+</div>

@@ -313,9 +313,6 @@ C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\run
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.csprojAssemblyReference.cache
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.AssemblyInfoInputs.cache
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.AssemblyInfo.cs
-C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.csproj.CoreCompileInputs.cache
-C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.RazorAssemblyInfo.cache
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.RazorAssemblyInfo.cs
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.TagHelpers.input.cache
@@ -349,3 +346,11 @@ C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Mes
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.pdb
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.genruntimeconfig.cache
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Home\Profile.cshtml.g.cs
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Home\DChat.cshtml.g.cs
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Profile\UserProfile.cshtml.g.cs
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Search.cshtml.g.cs
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\PagedList.dll
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\PagedList.Mvc.dll
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.csproj.CoreCompileInputs.cache
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cache
