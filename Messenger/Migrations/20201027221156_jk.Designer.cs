@@ -4,14 +4,16 @@ using Messenger.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Messenger.Migrations
 {
     [DbContext(typeof(MessengerContext))]
-    partial class MessengerContextModelSnapshot : ModelSnapshot
+    [Migration("20201027221156_jk")]
+    partial class jk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

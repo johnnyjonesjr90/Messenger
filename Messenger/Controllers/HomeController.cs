@@ -37,6 +37,7 @@ namespace Messenger.Controllers
             ViewModel viewModel = new ViewModel();
             viewModel.Posts = await _context.Posts.ToListAsync();
             viewModel.User = await _context.User.ToListAsync();
+            viewModel.Comment = await _context.Comment.ToListAsync();
             return View(viewModel);
         }
         public async Task<IActionResult> Profile()
@@ -100,6 +101,37 @@ namespace Messenger.Controllers
                 var sender = await _userManager.GetUserAsync(User);
                 post.UserID = sender.Id;
                 await _context.Posts.AddAsync(post);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+
+
+            }
+            return Error();
+        }
+
+        public async Task<IActionResult> Addlike(int postid)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                Posts post = _context.Posts.FirstOrDefault(p => p.id == postid);
+                post.likes ++;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+
+            }
+            return Error();
+        }
+        public async Task<IActionResult> AddComment(Comment comment, int postid, string text)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.UserName = User.Identity.Name;
+                var sender = await _userManager.GetUserAsync(User);
+                comment.UserID = sender.Id;
+                comment.postid = postid;
+                comment.Text = text;
+                await _context.Comment.AddAsync(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
 

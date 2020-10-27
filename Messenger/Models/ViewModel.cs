@@ -11,5 +11,6 @@ namespace Messenger.Models
         public IEnumerable<MessengerUser> User { get; set; }
 
         public IEnumerable<Posts> Posts { get; set; }
+        public IEnumerable<Comment> Comment { get; set; }
     }
 }

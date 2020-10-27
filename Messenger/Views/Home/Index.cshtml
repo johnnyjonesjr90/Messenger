@@ -71,9 +71,9 @@
                                                         </div>
                                                         <!--<div--> @*class="media-left"*@
                                                         <!--style="float:left">
-                                                        <a href="#" class="anchor-username"><h4 class="media-heading">@post.UserName</h4></a>
-                                                        <a href="#" class="anchor-time">@post.When.ToString("M/dd/yyyy hh:MM tt")</a>
-                                                    </div>-->
+                                                            <a href="#" class="anchor-username"><h4 class="media-heading">@post.UserName</h4></a>
+                                                            <a href="#" class="anchor-time">@post.When.ToString("M/dd/yyyy hh:MM tt")</a>
+                                                        </div>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-md-1">
@@ -90,27 +90,49 @@
                                             <hr>
                                             <div class="post-footer-option container">
                                                 <ul class="list-unstyled" style="display:inline">
-                                                    <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
-                                                    <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+                                                    <li>
+                                                        <a asp-action="Addlike" asp-controller="Home" asp-route-postid="@post.id">
+                                                            <i class="glyphicon glyphicon-thumbs-up"></i>
+                                                            Like @if (post.likes != 0)
+                                                            {@post.likes}
+                                                        </a>
+                                                    </li>
                                                     <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+                                                    <li></li>
                                                 </ul>
+                                                <form asp-action="AddComment"
+                                                      data-ajax-begin="clearInputField" data-ajax-complete=""
+                                                      data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+                                                      data-ajax="true" data-ajax-method="POST">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                    <div class="form-group">
+                                                        <input name="Text" class="form-control" id="messageText" placeholder="Write a Comment!" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input style="background-color: crimson; width:15%;text-align:center; color: white" type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
+                                                    </div>
+                                                    <input type="hidden" value="@userName" name="username" />
+                                                    <input type="hidden" value="@post.id" name="postId" />
+                                                </form>
                                             </div>
-                                            <!--<div class="post-footer-comment-wrapper">
-                                            <div class="comment-form">
-
-                                            </div>-->
-                                            @*<div class="comment">
-                                                <div class="media">
-                                                    <div class="media-left">
-
+                                            <button type="button" class="collapsible glyphicon glyphicon-chevron-down nav-link btn btn-link text-dark">Comments</button>
+                                            <div class="content" style="overflow:hidden; display:none;margin-top:4%">
+                                                @foreach (var comment in Model.Comment.OrderByDescending(p => p.When).Where(p => p.postid == post.id))
+                                                {
+                                                    <hr>
+                                                    <div class="post-footer-comment-wrapper" style="margin-top:3%">
+                                                        <div class="comment">
+                                                            <a href="#" class="anchor-username"><h4 class="media-heading"><img src="~/no-profile-pic-icon-24.jpg" style="width: 10%;border-radius:50%" /> @comment.UserName</h4></a><br />
+                                                            <p style="margin-left:10%">
+                                                                @comment.Text
+                                                            </p>
+                                                            <a href="#" class="anchor-time">@comment.When.ToShortTimeString()</a>
+                                                        </div>
                                                     </div>
-                                                    <div class="media-body">
-                                                        <a href="#" class="anchor-username"><h4 class="media-heading">Media heading</h4></a>
-                                                        <a href="#" class="anchor-time">51 mins</a>
-                                                    </div>
-                                                </div>
-                                            </div>*@
-                                            <!--</div>-->
+                                                    <hr>
+                                                }
+                                            </div>
+
                                         </section>
                                     </div>
                                 </div>
@@ -144,4 +166,7 @@
     <script src="~/js/post.js"></script>
     <script src="~/js/signalrPostHandler.js"></script>
     <script src="~/js/StickyNav.js"></script>
+    <script src="~/js/CommentHandler.js"></script>
+    <script src="~/js/Comment.js"></script>
+    <script src="~/js/Collapse.js"></script>
 }
