@@ -11,13 +11,14 @@ namespace Messenger.Models
     // Add profile data for application users by adding properties to the MessengerUser class
     public class MessengerUser : IdentityUser
     {
-        public int UserID { get; set; }
+        
         [PersonalData]
         [Column(TypeName = "nvarchar(100)")]
         public string FirstName { get; set; }
         [PersonalData]
         [Column(TypeName = "nvarchar(100)")]
         public string LastName { get; set; }
+        public byte[] Image { get; set; }
         public MessengerUser()
         {
             Messages = new HashSet<Message>();

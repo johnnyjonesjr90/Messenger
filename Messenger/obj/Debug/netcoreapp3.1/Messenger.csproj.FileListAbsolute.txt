@@ -354,3 +354,11 @@ C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\Pag
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.csproj.CoreCompileInputs.cache
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Messenger.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\System.Web.Mvc.dll
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\System.Web.Razor.dll
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\System.Web.Helpers.dll
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\System.Web.WebPages.Deployment.dll
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
+C:\Users\Johnny\Documents\GitHub\Messenger\Messenger\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\ImageRetriever\Default.cshtml.g.cs

@@ -10,7 +10,7 @@ using Messenger.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-
+using System.IO;
 
 namespace Messenger.Controllers
 {
@@ -52,13 +52,7 @@ namespace Messenger.Controllers
             return View(viewModel);
         }
 
-        //public async Task<IActionResult> UserProfile(string userid)
-        //{
-        //    ViewModel viewModel = new ViewModel();
-        //    viewModel.User = await _context.User.ToListAsync();
-        //    ViewBag.UserID = userid;
-        //    return View(viewModel);
-        //}
+
 
         public async Task<IActionResult> ChatHome()
         {
@@ -70,8 +64,7 @@ namespace Messenger.Controllers
             ViewModel viewModel = new ViewModel();
             viewModel.User = await _context.User.ToListAsync();
             viewModel.Messages = await _context.Messages.ToListAsync();
-            //var messages = await _context.Messages.ToListAsync();
-            //var user = await _context.User.ToListAsync();
+
             return View(viewModel);
         }
 
@@ -88,7 +81,7 @@ namespace Messenger.Controllers
                 await _context.Messages.AddAsync(message);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("ChatHome");
-                
+
 
             }
             return Error();
@@ -111,11 +104,11 @@ namespace Messenger.Controllers
 
         public async Task<IActionResult> Addlike(int postid)
         {
-            
+
             if (ModelState.IsValid)
             {
                 Posts post = _context.Posts.FirstOrDefault(p => p.id == postid);
-                post.likes ++;
+                post.likes++;
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
 
@@ -145,5 +138,39 @@ namespace Messenger.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
+        public IActionResult UploadImage(string id)
+        {
+            return View(new MessengerUser { Id = id });
+        }
+        [HttpPost]
+        public IActionResult UploadImage(MessengerUser user, string userid)
+        {
+            user = _context.User.FirstOrDefault(o => o.Id == userid);
+            if (user.Id != null)
+            {
+                foreach (var file in Request.Form.Files)
+                {
+                    var img = new Image { UserID = user.Id, ImageTitle = file.FileName };
+
+                    using (var ms = new MemoryStream())
+                    {
+                        file.CopyTo(ms);
+                        img.ImageData = ms.ToArray();
+                        ms.Close();
+                        ms.Dispose();
+                    }
+
+                    _context.SaveImage(img);
+                }
+
+                TempData["message"] = "Image(s) stored in  database!";
+            }
+            else
+            {
+                TempData["message"] = "Cannot add images to a non existent product!";
+            }
+
+            return RedirectToAction("Index");
+        }
+    } 
 }

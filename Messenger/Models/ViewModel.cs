@@ -12,5 +12,6 @@ namespace Messenger.Models
 
         public IEnumerable<Posts> Posts { get; set; }
         public IEnumerable<Comment> Comment { get; set; }
+        public IEnumerable<Image> Image { get; set; }
     }
 }
