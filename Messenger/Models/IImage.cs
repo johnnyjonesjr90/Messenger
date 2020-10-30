@@ -8,7 +8,7 @@ namespace Messenger.Models
     public interface IImage
     {
         //IQueryable<MessengerUser> User { get; }
-        Image GetImage(int id);
+        Image GetImage(string id);
         void SaveImage(Image image);
     }
 }

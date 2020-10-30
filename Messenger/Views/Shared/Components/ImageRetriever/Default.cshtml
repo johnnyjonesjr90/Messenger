@@ -1,9 +1,12 @@
-﻿
-@model Image
+﻿@model Image
 
 @if (Model != null)
 {
     <div float="left">
-        <img src="@Model.ImageDataUrl" width="50" />
+        <img src="@Model.ImageDataUrl" style="width: 30%;border-radius:50%" />
     </div>
+}
+else
+{
+    <img src="~/no-profile-pic-icon-24.jpg" style="width: 30%;border-radius:50%" />
 }

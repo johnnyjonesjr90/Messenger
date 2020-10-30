@@ -10,7 +10,10 @@
 
 <div style="width: 40%; height: 500px; margin-left: 30%; box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52) ">
     <div class="container" style="h ">
-        <img src="~/plimplim.jpg" style="width: 30%; margin-left: 35%" />
+
+            @await Component.InvokeAsync("ImageRetriever", new { id = v.Id })
+
+        @*<img src="~/plimplim.jpg" style="width: 30%; margin-left: 35%" />*@
         <h3 style="margin-top:2%; margin-left:25%">@v.FirstName @v.LastName</h3>
         <h3 style="margin-top:5%; margin-left:25%">Greeting</h3>
         <p style="margin-top:2%;margin-left:25%">Hello welcome to my profile.</p>

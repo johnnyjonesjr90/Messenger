@@ -18,7 +18,11 @@
 </head>
 <div style="float: right; width: 20%; height: 500px;margin-right:11%;border-top-left-radius:15%;border-top-right-radius:15% ;position:sticky; top:70px;background-color: #eee">
     <div class="container" style="; ">
-        <img src="~/no-profile-pic-icon-24.jpg" style="width: 20%; margin-left:5%;border-radius:50%" />
+        @*<img src="~/no-profile-pic-icon-24.jpg" style="width: 20%; margin-left:5%;border-radius:50%" />*@
+        <div style="width: 50%; margin-left:5%;border-radius:50%">
+            @await Component.InvokeAsync("ImageRetriever", new { id = v.Id })
+        </div>
+        
         <h3 style="margin-left: 3%; width: 30%">@v.FirstName @v.LastName</h3>
     </div>
 </div>
@@ -62,25 +66,17 @@
                                             <div class="row">
                                                 <div class="col-md-11">
                                                     <div class="media">
-                                                        <div class="media-left" style="margin-right:-2%">
-                                                            <a href="#">
-                                                                <img src="~/no-profile-pic-icon-24.jpg" style="width: 15%;border-radius:50%" />
-                                                            </a>
-                                                            <a href="#" class="anchor-username"><h3 class="media-heading">@post.UserName</h3></a>
-                                                            <a href="#" class="anchor-time">@post.When.ToString("M/dd/yyyy hh:MM tt")</a>
-                                                        </div>
-                                                        <!--<div--> @*class="media-left"*@
-                                                        <!--style="float:left">
-                                                            <a href="#" class="anchor-username"><h4 class="media-heading">@post.UserName</h4></a>
-                                                            <a href="#" class="anchor-time">@post.When.ToString("M/dd/yyyy hh:MM tt")</a>
-                                                        </div>-->
+                                                       <a style="width: 50%; height: 80%; margin-top:5%;margin-right:-30%" asp-action="UserProfile" asp-controller="Profile" asp-route-userid="@post.UserID">@await Component.InvokeAsync("ImageRetriever", new { id = post.UserID })</a>
+                                                       <a asp-action="UserProfile" asp-controller="Profile" asp-route-userid="@post.UserID" class="anchor-username"><h3 class="media-heading" style="margin-top:5%">@post.UserName</h3><p class="anchor-time" style="font-size:small; margin-top:5%">@post.When.ToString("M/dd/yyyy hh:MM tt")</p></a>
+                                                       
                                                     </div>
                                                 </div>
-                                                <div class="col-md-1">
+                                                <div class="col-md-1 float-right">
                                                     <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
                                                 </div>
                                             </div>
                                         </section>
+                                        <hr>
                                         <section class="post-body" style="margin-top:2%">
                                             <p>
                                                 @post.Text

@@ -19,9 +19,14 @@ namespace Messenger.Models
         }
         //public IQueryable<MessengerUser> User => _context.User;
 
-        public Image GetImage(int id)
+        public Image GetImage(string id)
         {
-            throw new NotImplementedException();
+            Image img = new Image();
+            img = _context.Image.FirstOrDefault(i => i.UserID == id);
+            if (img == null) return img;
+            string imageBase64Data = Convert.ToBase64String(img.ImageData);
+            img.ImageDataUrl = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+            return img;
         }
 
         public void SaveImage(Image image)

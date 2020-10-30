@@ -49,6 +49,7 @@ namespace Messenger.Controllers
             }
             ViewModel viewModel = new ViewModel();
             viewModel.User = await _context.User.ToListAsync();
+            viewModel.Image = await _context.Image.ToListAsync();
             return View(viewModel);
         }
 

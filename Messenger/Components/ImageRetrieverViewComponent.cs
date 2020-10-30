@@ -1,4 +1,5 @@
 ﻿using Messenger.Data;
+using Messenger.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Messenger.Components
         }
         public IViewComponentResult Invoke(string id)
         {
+           
             return View(repository.GetImage(id));
         }
     }
