@@ -36,8 +36,8 @@
                 @foreach (var post in Model.Posts.OrderByDescending(p => p.When).Where(p => p.UserID == v.Id)) 
                 { 
 
-                    <div class="container" style="width:1800px;overflow-x:hidden">
-                        <div class="col-md-5" style="box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52); padding-left:0%; padding-right:0%;padding-bottom:-2%; margin-bottom:5% ">
+                    @*<div class="container" style="width:1800px;overflow-x:hidden">*@
+                        <div class="col-md-11" style="box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52); padding-left: 0%; padding-right: 0%; padding-bottom: -2%; margin-bottom: 5%; margin-left: 12%; margin-top: 10% ">
                             <div class="panel panel-default" style="margin-bottom:0%">
                                 <div class="panel-body">
                                     <section class="post-heading">
@@ -55,7 +55,7 @@
                                         </div>
                                     </section>
                                     <hr>
-                                    <section class="post-body" style="margin-top:2%">
+                                    <section class="post-body" style="margin-top:2%; margin-bottom:2%">
                                         <p>
                                             @post.Text
                                         </p>
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @*</div>*@
                 }
             }
         </div>
