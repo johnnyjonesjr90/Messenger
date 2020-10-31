@@ -31,6 +31,8 @@ namespace Messenger.Controllers
         {
             ViewModel viewModel = new ViewModel();
             viewModel.User = await _context.User.ToListAsync();
+            viewModel.Posts = await _context.Posts.ToListAsync();
+            viewModel.Comment = await _context.Comment.ToListAsync();
             ViewBag.UserID = userid;
             return View(viewModel);
         }

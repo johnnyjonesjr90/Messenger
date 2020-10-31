@@ -25,7 +25,7 @@
 
         <div class="row">
 
-            <div style="height:500px;width:700px;border:2px solid #ccc;overflow:auto;margin-bottom: 50px; display:flex; flex-direction:column-reverse;">
+            <div style="height:450px;width:700px;border:2px solid #ccc;overflow:auto;margin-bottom: 50px; display:flex; flex-direction:column-reverse;">
                 <div class="col-md-12" id="chat">
                     @if (Model != null)
                     {
@@ -57,7 +57,7 @@
                                     <div class="@containerClass @contcolor @border" style="border-radius:20%; margin-top:2%">
 
                                         <p class="sender @textAlign">@message.UserName</p>
-                                        <p class="@textAlign">@message.Text</p>
+                                        <p class="@textAlign" style="margin-left:10%">@message.Text</p>
                                         <span class="@timePosition">@message.When.ToString("M/dd/yyyy hh:MM tt")</span>
                                     </div>
                                 </div>

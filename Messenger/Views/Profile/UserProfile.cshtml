@@ -1,22 +1,126 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model ViewModel
-
+@inject SignInManager<MessengerUser> SignInManager
+@inject UserManager<MessengerUser> UserManager
 @{
     ViewData["Title"] = "Home Page";
 
     MessengerUser v = Model.User.FirstOrDefault(o => o.Id == ViewBag.UserID);
-
+    var userName = User.Identity.Name;
 }
 
 <div style="width: 40%; height: 500px; margin-left: 30%; box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52) ">
     <div class="container" style="h ">
+        <div style="margin-left:35%">
 
             @await Component.InvokeAsync("ImageRetriever", new { id = v.Id })
+        </div>
+
 
         @*<img src="~/plimplim.jpg" style="width: 30%; margin-left: 35%" />*@
-        <h3 style="margin-top:2%; margin-left:25%">@v.FirstName @v.LastName</h3>
+        <h3 style="margin-top:2%; margin-left:35%">@v.FirstName @v.LastName</h3>
         <h3 style="margin-top:5%; margin-left:25%">Greeting</h3>
-        <p style="margin-top:2%;margin-left:25%">Hello welcome to my profile.</p>
+        @if (v.Quote != null)
+        {
+            <h4> "@v.Quote"</h4>
+        }
+    </div>
+
+</div>
+<div class="row" style="margin-top: 0%; margin-left: 26%; width: 42%; ">
+
+    <div>
+        <div class="col-md-12" id="chat">
+            @if (Model != null)
+            {
+                @foreach (var post in Model.Posts.OrderByDescending(p => p.When).Where(p => p.UserID == v.Id)) 
+                { 
+
+                    <div class="container" style="width:1800px;overflow-x:hidden">
+                        <div class="col-md-5" style="box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52); padding-left:0%; padding-right:0%;padding-bottom:-2%; margin-bottom:5% ">
+                            <div class="panel panel-default" style="margin-bottom:0%">
+                                <div class="panel-body">
+                                    <section class="post-heading">
+                                        <div class="row">
+                                            <div class="col-md-11">
+                                                <div class="media">
+                                                    <a style="width: 50%; height: 80%; margin-top:5%;margin-right:-30%" asp-action="UserProfile" asp-controller="Profile" asp-route-userid="@post.UserID">@await Component.InvokeAsync("ImageRetriever", new { id = post.UserID })</a>
+                                                    <a asp-action="UserProfile" asp-controller="Profile" asp-route-userid="@post.UserID" class="anchor-username"><h3 class="media-heading" style="margin-top:5%">@post.UserName</h3><p class="anchor-time" style="font-size:small; margin-top:5%">@post.When.ToString("M/dd/yyyy hh:MM tt")</p></a>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 float-right">
+                                                <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <hr>
+                                    <section class="post-body" style="margin-top:2%">
+                                        <p>
+                                            @post.Text
+                                        </p>
+                                    </section>
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+
+
+                                        <section class="post-footer" style="margin-bottom:0%">
+                                            <hr>
+                                            <div class="post-footer-option container">
+                                                <ul class="list-unstyled" style="display:inline">
+                                                    <li>
+                                                        <a asp-action="Addlike" asp-controller="Home" asp-route-postid="@post.id">
+                                                            <i class="glyphicon glyphicon-thumbs-up"></i>
+                                                            Like @if (post.likes != 0)
+                                                            {@post.likes}
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#"><i class="glyphicon glyphicon-share-alt"></i> Share</a></li>
+                                                    <li></li>
+                                                </ul>
+                                                <form asp-action="AddComment"
+                                                      data-ajax-begin="clearInputField" data-ajax-complete=""
+                                                      data-ajax-failure="alert('Fail')" data-ajax-success="sendMessage"
+                                                      data-ajax="true" data-ajax-method="POST">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                    <div class="form-group">
+                                                        <input name="Text" class="form-control" id="messageText" placeholder="Write a Comment!" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input style="background-color: crimson; width:15%;text-align:center; color: white" type="submit" value="Send" id="submitButton" class="btn btn-outline-primary btn-block" />
+                                                    </div>
+                                                    <input type="hidden" value="@userName" name="username" />
+                                                    <input type="hidden" value="@post.id" name="postId" />
+                                                </form>
+                                            </div>
+                                            <button type="button" class="collapsible glyphicon glyphicon-chevron-down nav-link btn btn-link text-dark">Comments</button>
+                                            <div class="content" style="overflow:hidden; display:none;margin-top:4%">
+                                                
+                                                @foreach (var comment in Model.Comment.OrderByDescending(p => p.When).Where(p => p.postid == post.id))
+                                                {
+                                                    <hr>
+                                                    <div class="post-footer-comment-wrapper" style="margin-top:3%">
+                                                        <div class="comment">
+                                                            <a href="#" class="anchor-username"><h4 class="media-heading"><img src="~/no-profile-pic-icon-24.jpg" style="width: 10%;border-radius:50%" /> @comment.UserName</h4></a><br />
+                                                            <p style="margin-left:10%">
+                                                                @comment.Text
+                                                            </p>
+                                                            <a href="#" class="anchor-time">@comment.When.ToShortTimeString()</a>
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                }
+                                            </div>
+
+                                        </section>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
     </div>
 </div>
 

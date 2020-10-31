@@ -134,11 +134,26 @@ namespace Messenger.Controllers
             return Error();
         }
 
+        public async Task<IActionResult> AddQuote(MessengerUser user, string text)
+        {
+            if (ModelState.IsValid)
+            {
+                user = _context.User.First(u => u.UserName == User.Identity.Name);
+                user.Quote = text;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Profile");
+
+
+            }
+            return Error();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
         public IActionResult UploadImage(string id)
         {
             return View(new MessengerUser { Id = id });

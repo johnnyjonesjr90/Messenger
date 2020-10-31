@@ -19,6 +19,8 @@ namespace Messenger.Models
         [Column(TypeName = "nvarchar(100)")]
         public string LastName { get; set; }
         public byte[] Image { get; set; }
+
+        public string Quote { get; set; }
         public MessengerUser()
         {
             Messages = new HashSet<Message>();

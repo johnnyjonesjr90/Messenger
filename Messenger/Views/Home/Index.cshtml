@@ -22,13 +22,19 @@
         <div style="width: 50%; margin-left:5%;border-radius:50%">
             @await Component.InvokeAsync("ImageRetriever", new { id = v.Id })
         </div>
-        
+
         <h3 style="margin-left: 3%; width: 30%">@v.FirstName @v.LastName</h3>
+
+        @if (v.Quote != null)
+        {
+            <h4> "@v.Quote"</h4>
+        }
+       
     </div>
 </div>
 
 
-<div class="jumbotron bg-light">
+<div class="jumbotron bg-light" >
     <div>
         <div>
             <div class="container" style="width: 30%; margin-left: 32%; margin-top: -5%; margin-bottom: -15%; padding-top: 5%; padding-bottom: 3%; padding-left: 1%; ">
@@ -58,7 +64,7 @@
                     @foreach (var post in Model.Posts.OrderByDescending(p => p.When))
                     {
 
-                        <div class="container" style="width:1800px;">
+                        <div class="container" style="width:1800px;overflow-x:hidden">
                             <div class="col-md-5" style="box-shadow: 1px 3px 5px 2px rgba(0,0,0,0.52); padding-left:0%; padding-right:0%;padding-bottom:-2%; margin-bottom:5% ">
                                 <div class="panel panel-default" style="margin-bottom:0%">
                                     <div class="panel-body">
@@ -66,9 +72,9 @@
                                             <div class="row">
                                                 <div class="col-md-11">
                                                     <div class="media">
-                                                       <a style="width: 50%; height: 80%; margin-top:5%;margin-right:-30%" asp-action="UserProfile" asp-controller="Profile" asp-route-userid="@post.UserID">@await Component.InvokeAsync("ImageRetriever", new { id = post.UserID })</a>
-                                                       <a asp-action="UserProfile" asp-controller="Profile" asp-route-userid="@post.UserID" class="anchor-username"><h3 class="media-heading" style="margin-top:5%">@post.UserName</h3><p class="anchor-time" style="font-size:small; margin-top:5%">@post.When.ToString("M/dd/yyyy hh:MM tt")</p></a>
-                                                       
+                                                        <a style="width: 50%; height: 80%; margin-top:5%;margin-right:-30%" asp-action="UserProfile" asp-controller="Profile" asp-route-userid="@post.UserID">@await Component.InvokeAsync("ImageRetriever", new { id = post.UserID })</a>
+                                                        <a asp-action="UserProfile" asp-controller="Profile" asp-route-userid="@post.UserID" class="anchor-username"><h3 class="media-heading" style="margin-top:5%">@post.UserName</h3><p class="anchor-time" style="font-size:small; margin-top:5%">@post.When.ToString("M/dd/yyyy hh:MM tt")</p></a>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-1 float-right">
@@ -146,6 +152,7 @@
 
 
 </div>
+
 
 @if (User.Identity.IsAuthenticated)
 {
